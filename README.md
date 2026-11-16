@@ -1,59 +1,25 @@
-# OBS Plugin Template
+# OBS Preview Toggle
 
-## Introduction
+[繁體中文](README.zh-TW.md)
 
-The plugin template is meant to be used as a starting point for OBS Studio plugin development. It includes:
+OBS Preview Toggle is a small OBS Studio plugin that hides the native preview area so docked panels can use the available space. It can also switch OBS's preview rendering independently.
 
-* Boilerplate plugin source code
-* A CMake project file
-* GitHub Actions workflows and repository actions
+## Use
 
-## Supported Build Environments
+Open **Tools → OBS Preview Toggle** in normal preview mode:
 
-| Platform  | Tool   |
-|-----------|--------|
-| Windows   | Visual Studio 17 2022 |
-| macOS     | XCode 16.0 |
-| Windows, macOS  | CMake 3.30.5 |
-| Ubuntu 24.04 | CMake 3.28.3 |
-| Ubuntu 24.04 | `ninja-build` |
-| Ubuntu 24.04 | `pkg-config`
-| Ubuntu 24.04 | `build-essential` |
+- **Hide / Show Preview Area** collapses or restores the center of the main window, including the source toolbar. The render setting is left alone.
+- **Disable / Enable Preview Rendering** changes OBS's native preview setting without changing the layout.
+- **Hide Preview Area and Disable Rendering** does both. Showing the area restores rendering if this action disabled it. If you change rendering separately, that choice takes precedence.
 
-## Quick Start
+Bind **OBS Preview Toggle: Show/Hide Preview Area** under **Settings → Hotkeys**. OBS saves the binding with the current profile. The panel starts visible each time OBS opens. Entering Studio Mode restores the panel and pauses the plugin's controls so the Preview, Program, and transition controls stay accessible.
 
-An absolute bare-bones [Quick Start Guide](https://github.com/obsproject/obs-plugintemplate/wiki/Quick-Start-Guide) is available in the wiki.
+## Windows x64 prototype
 
-## Documentation
+This prototype targets OBS Studio 33 on Windows x64. The plugin recognizes the native preview widgets before changing the layout. If a later OBS version changes the widget structure, the plugin logs a warning and skips the layout change. Check the [繁體中文 version](README.zh-TW.md#驗收) for the manual validation steps, including the DeckLink chain.
 
-All documentation can be found in the [Plugin Template Wiki](https://github.com/obsproject/obs-plugintemplate/wiki).
+GitHub Actions builds the plugin on a Windows runner. Download the `obs-preview-toggle-windows-x64` artifact from the workflow run, then extract the versioned ZIP inside it.
 
-Suggested reading to get up and running:
+Copy the extracted `obs-preview-toggle` folder to `C:\ProgramData\obs-studio\plugins\`. For [portable OBS 33](https://obsproject.com/kb/legacy-plugin-developer-info), copy it to `<OBS folder>\plugins\`. The DLL and the `data` directory sit side by side within the plugin folder. Restart OBS after copying the files. To remove the plugin, close OBS and remove that plugin folder.
 
-* [Getting started](https://github.com/obsproject/obs-plugintemplate/wiki/Getting-Started)
-* [Build system requirements](https://github.com/obsproject/obs-plugintemplate/wiki/Build-System-Requirements)
-* [Build system options](https://github.com/obsproject/obs-plugintemplate/wiki/CMake-Build-System-Options)
-
-## GitHub Actions & CI
-
-Default GitHub Actions workflows are available for the following repository actions:
-
-* `push`: Run for commits or tags pushed to `master` or `main` branches.
-* `pr-pull`: Run when a Pull Request has been pushed or synchronized.
-* `dispatch`: Run when triggered by the workflow dispatch in GitHub's user interface.
-* `build-project`: Builds the actual project and is triggered by other workflows.
-* `check-format`: Checks CMake and plugin source code formatting and is triggered by other workflows.
-
-The workflows make use of GitHub repository actions (contained in `.github/actions`) and build scripts (contained in `.github/scripts`) which are not needed for local development, but might need to be adjusted if additional/different steps are required to build the plugin.
-
-### Retrieving build artifacts
-
-Successful builds on GitHub Actions will produce build artifacts that can be downloaded for testing. These artifacts are commonly simple archives and will not contain package installers or installation programs.
-
-### Building a Release
-
-To create a release, an appropriately named tag needs to be pushed to the `main`/`master` branch using semantic versioning (e.g., `12.3.4`, `23.4.5-beta2`). A draft release will be created on the associated repository with generated installer packages or installation programs attached as release artifacts.
-
-## Signing and Notarizing on macOS
-
-Basic concepts of codesigning and notarization on macOS are explained in the correspodning [Wiki article](https://github.com/obsproject/obs-plugintemplate/wiki/Codesigning-On-macOS) which has a specific section for the [GitHub Actions setup](https://github.com/obsproject/obs-plugintemplate/wiki/Codesigning-On-macOS#setting-up-code-signing-for-github-actions).
+See [LICENSE](LICENSE) for licensing.

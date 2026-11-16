@@ -33,13 +33,13 @@
     },
     "platformConfig": {
         "macos": {
-            "bundleId": "com.example.plugintemplate-for-obs"
+            "bundleId": "io.github.aghdoo.obs-preview-toggle"
         }
     },
-    "name": "plugintemplate-for-obs",
-    "displayName": "Plugin Template for OBS",
-    "version": "1.0.0",
-    "author": "Your Name Here",
-    "website": "https://example.com",
-    "email": "me@example.com"
+    "name": "obs-preview-toggle",
+    "displayName": "OBS Preview Toggle",
+    "version": "0.1.0",
+    "author": "AghDoo",
+    "website": "https://github.com/AghDoo/obs-preview-toggle",
+    "email": "AghDoo"
 }
